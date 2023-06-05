@@ -28,6 +28,15 @@ class Counters extends Component {
      };
      
 
+     handleDecrement = counter => {
+        const counters = [...this.state.counters];
+        const index = counters.indexOf(counter);
+        counters[index] = {...counter};
+        counters[index].value--;
+
+        this.setState({counters});
+     };
+
      handleReset = () => {
         const counters = this.state.counters.map( c => 
             {c.value = 0;
@@ -40,20 +49,26 @@ class Counters extends Component {
     handleRefresh = () => {
     window.location.reload(); 
   };
+
+
     render() { 
-        return (
-            <div>
-                {this.state.counters.map(counter => (
-                <Counter
-                key={counter.id}
-                onDelete = {this.handleDelete}
-                onIncrement = { this.handleIncrement}
-                counter = {counter}
-                />
-                ))};
-                <button onClick={this.handleReset} className='  ml-[4rem] mr-[1rem] bg-blue-500 rounded-md text-white border-[.1rem] border-blue-500 py-[.5rem] px-[2rem] text-xl font-semibold '>Reset</button>
-                <button onClick={this.handleRefresh} className=' bg-blue-500 rounded-md text-white border-[.1rem] border-blue-500 py-[.5rem] px-[2rem] text-xl font-semibold '>Refresh</button>
-            </div>
+        return ( 
+            <React.Fragment>
+                <h1 className=' text-blue-500 text-2xl font-bold ml-[4rem] mr-[1rem]'>Total Counter = { this.state.counters.filter(c => c.value > 0).length}</h1>
+                <div>
+                    {this.state.counters.map(counter => (
+                    <Counter
+                    key={counter.id}
+                    onDelete = {this.handleDelete}
+                    onIncrement = { this.handleIncrement}
+                    onDecrement = { this.handleDecrement}
+                    counter = {counter}
+                    />
+                    ))};
+                    <button onClick={this.handleReset} className='  ml-[4rem] mr-[1rem] bg-blue-500 rounded-md text-white border-[.1rem] border-blue-500 py-[.5rem] px-[2rem] text-xl font-semibold '>Reset</button>
+                    <button onClick={this.handleRefresh} className=' bg-blue-500 rounded-md text-white border-[.1rem] border-blue-500 py-[.5rem] px-[2rem] text-xl font-semibold '>Refresh</button>
+                </div>
+            </React.Fragment>
         );
     }
 }

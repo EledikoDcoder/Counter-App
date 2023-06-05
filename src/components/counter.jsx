@@ -13,9 +13,10 @@ class Counter extends Component {
     render() { 
         return (
             <div className=' my-[2rem] mx-[4rem] gap-[1rem] flex items-center'>
-                <h1 className=' rounded-md bg-blue-500 text-white py-[.5rem] px-[2rem] text-xl'>{this.formatCount()}</h1>
-                <button onClick={ () => this.props.onIncrement (this.props.counter)} className=' rounded-md text-blue-500 border-[.1rem] border-blue-500 py-[.5rem] px-[2rem] text-xl font-semibold '>Increment</button>
-                <button onClick={() => this.props.onDelete (this.props.counter.id)} className=' rounded-md text-white border-[.1rem] bg-red-500 border-red-500 py-[.5rem] px-[2rem] text-xl font-semibold '>Delete</button>
+                <h1 className=' rounded-md bg-blue-500 text-white py-[.5rem] px-[1rem] text-xl'>{this.formatCount()}</h1>
+                <button onClick={ () => this.props.onIncrement (this.props.counter)}   className=' rounded-md text-blue-500 border-[.1rem] border-blue-500 py-[.5rem] px-[1rem] text-xl font-bold '>+</button>
+                <button onClick={ () => this.props.onDecrement (this.props.counter)} disabled={ this.props.counter.value === 0 ? "disabled" : ""}   className=' rounded-md text-blue-500 border-[.1rem] border-blue-500 py-[.5rem] px-[1rem] text-xl font-bold '>-</button>
+                <button onClick={ () => this.props.onDelete (this.props.counter.id)} className=' rounded-md text-white border-[.1rem] bg-red-500 border-red-500 py-[.5rem] px-[1.5rem] text-xl font-semibold '>Delete</button>
             </div>
         );
     }
